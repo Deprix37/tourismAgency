@@ -53,7 +53,7 @@ public class UserDao {
     }
 
 
-        //Veriyi modele çevirme
+    //Veriyi modele çevirme
     public User match(ResultSet rs) throws SQLException{
         User obj = new User();
         obj.setId(rs.getInt("user_id"));
