@@ -59,12 +59,27 @@ public class Helper {
                 msg = "Hatalı işlem yaptınız !";
                 title = "Hata";
                 break;
+            case "error2":
+                msg = "Bu kullanıcı adı ile bir kayıt var";
+                title = "Hata";
+                break;
+
             default:
                 msg = str;
                 title = "Mesaj";
         }
         JOptionPane.showMessageDialog(null, msg, title, JOptionPane.INFORMATION_MESSAGE);
 
+    }
+    public static boolean confirm(String str) {
+        optionPaneTR();
+        String msg;
+        if (str.equals("sure")) {
+            msg = "Bu işlemi yapmak istediğine emin misin ? ";
+        } else {
+            msg = str;
+        }
+        return JOptionPane.showConfirmDialog(null, msg, "Emin misin ?", JOptionPane.YES_NO_OPTION) == 0;
     }
 
     private static void optionPaneTR() {

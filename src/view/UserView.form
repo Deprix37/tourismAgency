@@ -10,9 +10,10 @@
     <children>
       <component id="45a2d" class="javax.swing.JLabel" binding="lbl_user">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="12" style="1"/>
           <text value="Kullanıcı Ekle/Düzenle"/>
         </properties>
       </component>
@@ -50,7 +51,7 @@
           <text value="Şifre"/>
         </properties>
       </component>
-      <component id="e9e76" class="javax.swing.JPasswordField" binding="lbl_user_pass">
+      <component id="e9e76" class="javax.swing.JPasswordField" binding="fld_user_pass">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -66,13 +67,13 @@
           <text value="Rol"/>
         </properties>
       </component>
-      <component id="63afd" class="javax.swing.JComboBox" binding="cmb_role">
+      <component id="63afd" class="javax.swing.JComboBox" binding="cmb_user_role">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="73c73" class="javax.swing.JButton" binding="btn_save">
+      <component id="73c73" class="javax.swing.JButton" binding="btn_userSave">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

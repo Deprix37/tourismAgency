@@ -44,9 +44,9 @@ public class LoginView extends Layout{
                     dispose();
                     AdminView adminView = new AdminView(loginUser);
 
-
-                }else
+                }else if ("employee".equals(loginUser.getRole())) {
                     System.out.println(loginUser.toString());
+                }
             }
 
 
