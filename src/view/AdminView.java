@@ -34,6 +34,7 @@ public class AdminView extends Layout{
         this.add(container);
         this.guiInitilaze(700, 500);
         this.user = loggedInUser;
+        lbl_welcome.setText("Hoş Geldiniz:  " + this.user.getUsername());
 
         if (loggedInUser == null) {
             dispose();

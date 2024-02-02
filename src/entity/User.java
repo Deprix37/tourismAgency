@@ -6,8 +6,8 @@ public class User {
     private String password;
     private String role;
 
-    public User(String name, String pass, String role) {
-    }
+ /*   public User(String name, String pass, String role) {
+    }*/
 
     public enum Role{admin,employee}
 
