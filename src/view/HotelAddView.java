@@ -27,13 +27,17 @@ public class HotelAddView extends Layout{
     private Hotel hotel;
     private User user;
     private UserManager userManager;
+
+
     public HotelAddView(Hotel hotel){
-        //this.hotel = hotel;
+        this.hotel = hotel;
         this.hotelManager= new HotelManager();
         this.add(container);
         this.guiInitilaze(700,700);
         loadHotelAddCompenent();
-        this.hotel = (hotel != null) ? hotel : new Hotel();
+
+
+        //this.hotel = (hotel != null) ? hotel : new Hotel();
 
 
     }
@@ -46,20 +50,26 @@ public class HotelAddView extends Layout{
                 Helper.showMsg("fill");
             }else {
                 boolean result = true;
-                //Hotel hotelNew = new Hotel();
-                hotel.setHotelName(fld_otelName.getText());
-                hotel.setHotelMail(fld_otelMail.getText());
-                hotel.setHotelPhone(fld_otelPhone.getText());
-                hotel.setHotelAddress(fld_otelAdres.getText());
-                hotel.setHotelStar(String.valueOf(cmb_otelStar.getSelectedItem()));
-                hotel.setHotelCarpark(rbtn_wifi.isSelected());
-                hotel.setHotelPool(rbtn_pool.isSelected());
-                hotel.setHotelFitness(rbtn_fitness.isSelected());
-                hotel.setHotelConcierge(rbtn_concierge.isSelected());
-                hotel.setHotelSpa(rbtn_spa.isSelected());
-                hotel.setHotelRoomservice(rbtn_roomservice.isSelected());
-                if (this.hotel.getId()==0){
-                    result = this.hotelManager.save(hotel);
+                Hotel hotelNew = new Hotel();
+                hotelNew.setHotelName(fld_otelName.getText());
+                hotelNew.setHotelMail(fld_otelMail.getText());
+                hotelNew.setHotelPhone(fld_otelPhone.getText());
+                hotelNew.setHotelAddress(fld_otelAdres.getText());
+                hotelNew.setHotelStar(String.valueOf(cmb_otelStar.getSelectedItem()));
+                hotelNew.setHotelCarpark(rbtn_wifi.isSelected());
+                hotelNew.setHotelPool(rbtn_pool.isSelected());
+                hotelNew.setHotelFitness(rbtn_fitness.isSelected());
+                hotelNew.setHotelConcierge(rbtn_concierge.isSelected());
+                hotelNew.setHotelSpa(rbtn_spa.isSelected());
+                hotelNew.setHotelRoomservice(rbtn_roomservice.isSelected());
+                if (hotelNew.getId()==0){
+                    result = this.hotelManager.save(hotelNew);
+
+                    dispose();
+
+
+
+
                 }else {
 
                 }
