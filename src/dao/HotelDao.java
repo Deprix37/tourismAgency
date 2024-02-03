@@ -87,6 +87,36 @@ public class HotelDao {
         }
         return true;
     }
+    public Hotel getById(int id){
+        Hotel obj = null;
+        String query = "SELECT * FROM public.hotel WHERE hotel_id = ?";
+        try {
+            PreparedStatement pr = this.con.prepareStatement(query);
+            pr.setInt(1,id);
+            ResultSet rs = pr.executeQuery();
+            if (rs.next()){
+                obj = this.match(rs);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return obj;
+    }
+   /* public boolean savePencion(Hotel hotel, String val){
+        String query = "INSERT INTO public.pencion(" +
+                " hotel_id, pencion_type)" +
+                " VALUES ( ?, ?)";
+        try {
+            PreparedStatement pr = con.prepareStatement(query);
+            pr.setInt(1,hotel.getId());
+            pr.setString(2,val);
+
+            return pr.executeUpdate() != -1;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return true;
+    }*/
 
 
 }

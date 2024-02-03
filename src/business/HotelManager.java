@@ -48,6 +48,9 @@ public class HotelManager {
     public ArrayList<Hotel> findAll(){
         return this.hotelDao.findAll();
     }
+    public Hotel getById(int id){
+        return this.hotelDao.getById(id);
+    }
 
 
 
