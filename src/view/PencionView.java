@@ -3,6 +3,7 @@ package view;
 import business.HotelManager;
 import business.PencionManager;
 import entity.Hotel;
+import entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,19 +22,22 @@ public class PencionView extends Layout {
 
 
     public PencionView(Hotel hotel) {
+
         this.pencionManager = new PencionManager(hotel);
         this.hotelManager = new HotelManager();
         this.hotel = hotel;
         this.add(container);
         this.guiInitilaze(400, 350);
-        this.lbl_otelid.setText(String.valueOf(this.hotel.getId()));
+        lbl_otelid.setText("Otel ID:" + this.hotel.getId());
+        //this.lbl_otelid.setText(String.valueOf(this.hotel.getId()));
 
         btn_pencionSave.addActionListener(e -> {
+
           this.cmb_pencion.getSelectedItem().toString();
-            System.out.println(this.cmb_pencion.getSelectedItem().toString());
-            System.out.println(hotel.getId());
-            System.out.println(hotel.getHotelName());
             pencionManager.savePencion(hotel,String.valueOf(cmb_pencion.getSelectedItem()));
+            dispose();
+
+
         });
     }
 

@@ -16,7 +16,7 @@ public class PencionManager {
     }
     public boolean savePencion(Hotel hotel, String val){
         if (hotel.getId() !=0 ){
-            Helper.showMsg("error");
+            Helper.showMsg("done");
 
         }
         return this.pencionDao.savePencion(hotel,val);
@@ -24,10 +24,8 @@ public class PencionManager {
 
 
     public ArrayList<Object[]> getForTable(int size, ArrayList<Pencion> pencions){
-        System.out.println("2.1");
         ArrayList<Object[]> pencionList = new ArrayList<>();
         for (Pencion obj : pencions){
-            System.out.println("2.3");
             int i = 0;
             Object[] rowObject = new Object[size];
             rowObject[i++] = obj.getPencionId();
