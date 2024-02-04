@@ -234,7 +234,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="fc979" class="javax.swing.JTable" binding="table1" default-binding="true">
+                  <component id="fc979" class="javax.swing.JTable" binding="tablo_room">
                     <constraints/>
                     <properties/>
                   </component>

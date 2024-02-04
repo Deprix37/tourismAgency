@@ -1,9 +1,6 @@
 package view;
 
-import business.HotelManager;
-import business.PencionManager;
-import business.SeasonManager;
-import business.UserManager;
+import business.*;
 import entity.User;
 
 import javax.swing.*;
@@ -18,6 +15,7 @@ public class EmployeeView extends Layout {
     private HotelManager hotelManager;
     private PencionManager pencionManager;
     private SeasonManager seasonManager;
+    private RoomManager roomManager;
     private JPanel container;
     private JTabbedPane tabbedPane1;
     private JTable tablo_hotel;
@@ -39,7 +37,7 @@ public class EmployeeView extends Layout {
     private JButton odaAraButton;
     private JButton odaEkleButton;
     private JButton resetButton;
-    private JTable table1;
+    private JTable tablo_room;
     Object[] col_hotel;
     private JPopupMenu hotelMenu;
     Object[] col_pancion;
@@ -47,6 +45,7 @@ public class EmployeeView extends Layout {
     Object[] col_room;
     private DefaultTableModel tmdl_pancion = new DefaultTableModel();
     private DefaultTableModel tmdl_season = new DefaultTableModel();
+    private DefaultTableModel tmdl_room = new DefaultTableModel();
 
 
 
@@ -55,6 +54,7 @@ public class EmployeeView extends Layout {
         this.seasonManager = new SeasonManager(null);
         this.hotelManager = new HotelManager();
         this.pencionManager = new PencionManager(null);
+        this.roomManager = new RoomManager();
         this.add(container);
         this.guiInitilaze(1300, 550);
         this.user = loggedInUser;
@@ -67,6 +67,7 @@ public class EmployeeView extends Layout {
         loadPancionTable(null);
         //loadSeasonTable(null);
 
+        loadRoomTable(null);
 
     }
 
@@ -168,6 +169,19 @@ public class EmployeeView extends Layout {
 
     }
 
+   public void loadRoomTable(ArrayList<Object[]> roomList) {
+        col_room = new Object[]{"ID", "Otel Adı", "Pansiyon" , "Oda Tipi", "Stok", "Yetişkin Fiyat","Çocuk Fiyat", "Yatak Kapasitesi", "m2", "Tv","Minibar","Konsol","Kasa","Projeksiyon"};
 
+        if (roomList == null) {
+
+            roomList = this.roomManager.getForTable(col_room.length, this.roomManager.findAll());
+
+        }
+
+        //System.out.println("loadhotel" + pancionList.size());
+        createTable(this.tmdl_room, this.tablo_room, col_room, roomList);
+
+
+    }
 }
 
