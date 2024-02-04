@@ -2,6 +2,7 @@ package dao;
 
 import core.Db;
 import entity.Hotel;
+import entity.Room;
 import entity.User;
 
 import java.sql.Connection;
@@ -102,6 +103,7 @@ public class HotelDao {
         }
         return obj;
     }
+
    /* public boolean savePencion(Hotel hotel, String val){
         String query = "INSERT INTO public.pencion(" +
                 " hotel_id, pencion_type)" +

@@ -47,4 +47,5 @@ public class RoomManager {
     public ArrayList<Room> findAll(){
         return this.roomDao.findAll();
     }
+
 }

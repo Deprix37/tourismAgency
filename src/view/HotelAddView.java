@@ -33,7 +33,7 @@ public class HotelAddView extends Layout{
         this.hotel = hotel;
         this.hotelManager= new HotelManager();
         this.add(container);
-        this.guiInitilaze(700,700);
+        this.guiInitilaze(400,400);
         loadHotelAddCompenent();
 
 
@@ -66,9 +66,6 @@ public class HotelAddView extends Layout{
                     result = this.hotelManager.save(hotelNew);
 
                     dispose();
-
-
-
 
                 }else {
 

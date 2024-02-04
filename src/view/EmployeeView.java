@@ -68,6 +68,9 @@ public class EmployeeView extends Layout {
         //loadSeasonTable(null);
 
         loadRoomTable(null);
+        loadRoomCompanent();
+
+
 
     }
 
@@ -182,6 +185,20 @@ public class EmployeeView extends Layout {
         createTable(this.tmdl_room, this.tablo_room, col_room, roomList);
 
 
+    }
+    public void loadRoomCompanent(){
+        odaEkleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RoomView roomView = new RoomView(null);
+                roomView.addWindowListener(new WindowAdapter() { //yeni açılan pencereyi izler
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        loadHotelTable(null); //kapandıktan sonra tabloyu günceller
+                    }
+                });
+            }
+        });
     }
 }
 

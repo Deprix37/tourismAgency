@@ -1,5 +1,6 @@
 package dao;
 
+import business.HotelManager;
 import core.Db;
 import entity.Hotel;
 import entity.Pencion;
@@ -100,5 +101,6 @@ public class RoomDao {
         }
         return roomList;
     }
+
 
 }
