@@ -1,12 +1,15 @@
 package entity;
 
+import core.ComboItem;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Season {
     private int seasonId;
     private int hotelId;
-    private String seasonStartDate;
-    private String seasonEndDate;
+    private LocalDate seasonStartDate;
+    private LocalDate seasonEndDate;
 
     public int getSeasonId() {
         return seasonId;
@@ -24,19 +27,19 @@ public class Season {
         this.hotelId = hotelId;
     }
 
-    public String getSeasonStartDate() {
+    public LocalDate getSeasonStartDate() {
         return seasonStartDate;
     }
 
-    public void setSeasonStartDate(String seasonStartDate) {
+    public void setSeasonStartDate(LocalDate seasonStartDate) {
         this.seasonStartDate = seasonStartDate;
     }
 
-    public String getSeasonEndDate() {
+    public LocalDate getSeasonEndDate() {
         return seasonEndDate;
     }
 
-    public void setSeasonEndDate(String seasonEndDate) {
+    public void setSeasonEndDate(LocalDate seasonEndDate) {
         this.seasonEndDate = seasonEndDate;
     }
 
@@ -48,5 +51,8 @@ public class Season {
                 ", seasonStartDate=" + seasonStartDate +
                 ", seasonFinishDate=" + seasonEndDate +
                 '}';
+    }
+    public ComboItem getComboItem() {
+        return new ComboItem(this.getSeasonId(),this.getSeasonStartDate() + " - " + this.getSeasonEndDate());
     }
 }

@@ -1,5 +1,7 @@
 package entity;
 
+import core.ComboItem;
+
 public class Pencion {
     private int pencionId;
     private int hotelId;
@@ -39,5 +41,8 @@ public class Pencion {
                 ", hotelId=" + hotelId +
                 ", pencionType='" + pencionType + '\'' +
                 '}';
+    }
+    public ComboItem getComboItem() {
+        return new ComboItem(this.getPencionId(),this.getPencionType());
     }
 }

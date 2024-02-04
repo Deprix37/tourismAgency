@@ -1,5 +1,6 @@
 package business;
 
+import core.Helper;
 import dao.RoomDao;
 import entity.Hotel;
 import entity.Pencion;
@@ -46,6 +47,13 @@ public class RoomManager {
     }
     public ArrayList<Room> findAll(){
         return this.roomDao.findAll();
+    }
+    public boolean save(Room room){
+        if (room.getRoom_id() !=0 ){
+            Helper.showMsg("error");
+
+        }
+        return this.roomDao.saveRoom(room);
     }
 
 }

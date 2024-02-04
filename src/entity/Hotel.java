@@ -1,5 +1,7 @@
 package entity;
 
+import core.ComboItem;
+
 public class Hotel {
     private int id;
     private String hotelName;
@@ -142,4 +144,7 @@ public class Hotel {
     }
 
 
+    public ComboItem getComboItem() {
+        return new ComboItem(this.getId(),this.getHotelName()+ " - " + this.getHotelAddress());
+    }
 }

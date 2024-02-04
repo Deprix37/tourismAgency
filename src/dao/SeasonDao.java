@@ -37,11 +37,11 @@ public class SeasonDao {
         Season obj = new Season();
         obj.setSeasonId(rs.getInt("season_id"));
         obj.setHotelId(rs.getInt("hotel_id"));
-        obj.setSeasonStartDate(rs.getString("season_startdate"));
-        obj.setSeasonEndDate(rs.getString("season_enddate"));
+        obj.setSeasonStartDate(LocalDate.parse(rs.getString("season_startdate")));
+        obj.setSeasonEndDate(LocalDate.parse(rs.getString("season_enddate")));
         return obj;
     }
-    public boolean saveSeason(Hotel hotel, String startDate, String endDate){
+    public boolean saveSeason(Hotel hotel, LocalDate startDate, LocalDate endDate){
         String query = "INSERT INTO public.season" +
                 "(hotel_id, season_startdate, season_enddate)" +
                 "VALUES ( ?, ?, ?)";

@@ -19,6 +19,12 @@ public class Room {
     private Hotel hotel;
     private Season season;
     private Pencion pencion;
+    public enum RoomType{
+        Single,
+        Double,
+        JuniorSuite,
+        Suite
+    }
 
     public Room() {
     }

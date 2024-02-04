@@ -7,6 +7,7 @@ import entity.Pencion;
 import entity.Season;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -18,7 +19,7 @@ public class SeasonManager {
         this.seasonDao = new SeasonDao();
         this.hotel = hotel;
     }
-    public boolean saveSeason(Hotel hotel, String startDate, String endDate){
+    public boolean saveSeason(Hotel hotel, LocalDate startDate, LocalDate endDate){
         if (hotel.getId() !=0 ){
             Helper.showMsg("done");
 

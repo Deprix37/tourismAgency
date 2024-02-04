@@ -2,6 +2,7 @@ package view;
 
 import business.HotelManager;
 import business.SeasonManager;
+import core.Helper;
 import entity.Hotel;
 
 import javax.swing.*;
@@ -33,10 +34,13 @@ public class SeasonView extends Layout{
         this.guiInitilaze(400, 350);
         lbl_otelD.setText("OTEL ID : " + hotel.getId());
         btn_seasonSave.addActionListener(e -> {
-            String convertedSeaonStartDate = LocalDate.parse(this.fld_startDate.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString();
-            String convertedSeaonEndDate = LocalDate.parse(this.fld_endDate.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString();
-            seasonManager.saveSeason(hotel,convertedSeaonStartDate,convertedSeaonEndDate);
-            dispose();
+
+                LocalDate convertedSeaonStartDate = LocalDate.parse(LocalDate.parse(this.fld_startDate.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString());
+                LocalDate convertedSeaonEndDate = LocalDate.parse(LocalDate.parse(this.fld_endDate.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString());
+                seasonManager.saveSeason(hotel,convertedSeaonStartDate,convertedSeaonEndDate);
+                dispose();
+
+
         });
     }
 

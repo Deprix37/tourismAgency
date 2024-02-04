@@ -65,7 +65,7 @@ public class EmployeeView extends Layout {
 
 
         loadPancionTable(null);
-        //loadSeasonTable(null);
+        loadSeasonTable(null);
 
         loadRoomTable(null);
         loadRoomCompanent();
@@ -195,9 +195,11 @@ public class EmployeeView extends Layout {
                     @Override
                     public void windowClosed(WindowEvent e) {
                         loadHotelTable(null); //kapandıktan sonra tabloyu günceller
+                        loadRoomTable(null);
                     }
                 });
             }
+
         });
     }
 }
