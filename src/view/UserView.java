@@ -61,30 +61,7 @@ public class UserView extends Layout{
                 }
             }
         });
-        /*btn_userSave.addActionListener(e -> {
-            JTextField[] checkFieldList = {this.fld_user_name,this.fld_user_pass};
-            if (Helper.isFieldListEmpty(checkFieldList)){
-                Helper.showMsg("fill");
-            }else {
-                    boolean result = true;
-                    if (this.user == null) {
-                        //User obj = new User(fld_user_name.getText(),fld_user_pass.getText(),String.valueOf(cmb_user_role.getSelectedItem()));
-                        this.user.setUsername(fld_user_name.getText());
-                        this.user.setPassword(fld_user_pass.getText());
-                        this.user.setRole(String.valueOf(cmb_user_role.getSelectedItem()));
-                        //result = this.userManager.save(this.user);
-                    }
-                 result = this.userManager.save(this.user);
-                    if (result){
-                        Helper.showMsg("done");
-                        dispose();
-                    }else {
-                        Helper.showMsg("error");
-                    }
 
-            }
-
-        });*/
     }
 
 }

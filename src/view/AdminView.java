@@ -130,7 +130,7 @@ public class AdminView extends Layout{
         if (userList==null){
             userList = this.userManager.getForTable(col_user.length, this.userManager.findAll());
         }
-        System.out.println("loaduser"+userList.size());
+
         createTable(this.tmdl_user, this.tbl_user, col_user, userList);
     }
 

@@ -131,7 +131,7 @@ public class UserDao {
     public ArrayList<User> findByRole(String userSearhRole) {
         ArrayList<User> userList = new ArrayList<>();
         String query = "SELECT * FROM public.user WHERE user_role=" + "'"+userSearhRole+"'";
-        System.out.println("query" + query);
+
         try {
             ResultSet rs = this.con.createStatement().executeQuery(query);
             while (rs.next()){

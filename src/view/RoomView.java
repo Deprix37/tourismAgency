@@ -66,21 +66,21 @@ public class RoomView extends Layout {
         for (Pencion pencion : this.pencionManager.findAll()) {
             cmb_pencion.addItem(pencion.getComboItem());
         }
-        System.out.println("1");
+
         btn_roomSave.addActionListener(e -> {
             JTextField[] checkFieldList = {fld_AdultPrice,fld_childPrice,fld_meter,fld_stok,fld_bedCapacity};
             if (Helper.isFieldListEmpty(checkFieldList)){
                 Helper.showMsg("fill");
-                System.out.println("2");
+
             } else
-                System.out.println("3");
+
             {
-                System.out.println("4");
+
                 boolean result;
                 Room roomNew = new Room();
-                System.out.println("5");
+
                 ComboItem selectedHotel = (ComboItem) cmb_hotel.getSelectedItem();
-                System.out.println("6");
+
 
                 roomNew.setHotel_id(selectedHotel.getKey());
                 ComboItem selectedPension = (ComboItem) cmb_pencion.getSelectedItem();
@@ -102,7 +102,7 @@ public class RoomView extends Layout {
                 roomNew.setRoom_konsol(rbtn_konsol.getModel().isSelected());
                 roomNew.setRoom_kasa(rbtn_kasa.getModel().isSelected());
                 roomNew.setRoom_projeksiyon(rbtn_projeksiyon.getModel().isSelected());
-                System.out.println("7");
+
 
 
                 if (roomNew.getRoom_id()==0) {
