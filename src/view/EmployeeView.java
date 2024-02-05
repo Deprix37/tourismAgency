@@ -1,12 +1,14 @@
 package view;
 
 import business.*;
+import entity.Room;
 import entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class EmployeeView extends Layout {
@@ -28,13 +30,11 @@ public class EmployeeView extends Layout {
     private JTable tbl_pancion;
     private JScrollPane getSpn_pancion;
     private JScrollPane spn_pancion;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JButton odaAraButton;
+    private JTextField fld_otelName;
+    private JTextField fld_addressName;
+    private JTextField fld_startDate;
+    private JTextField fld_endDate;
+    private JButton btn_roomSearch;
     private JButton odaEkleButton;
     private JButton resetButton;
     private JTable tablo_room;
@@ -49,6 +49,9 @@ public class EmployeeView extends Layout {
 
 
 
+    //Kullanıcı arayüzünü temsil eden katmandır.
+    //Kullanıcı ile etkileşim sağlar, kullanıcıdan gelen istekleri Business'a ileterek işlemleri başlatır.
+    //Verileri kullanıcıya gösterir.
 
     public EmployeeView(User loggedInUser) {
         this.seasonManager = new SeasonManager(null);
@@ -71,8 +74,22 @@ public class EmployeeView extends Layout {
         loadRoomCompanent();
 
 
+       btn_roomSearch.addActionListener(e -> {
+            String otelName = fld_otelName.getText();
+            String addressName = fld_addressName.getText();
+            String startDatee = fld_startDate.getText();
+            String endDatee = fld_endDate.getText();
+
+            ArrayList<Room> searchedRoomList = roomManager.findByRoomFilter(otelName,addressName,startDatee,endDatee);
+            ArrayList<Object[]> searchedRoomRowList = roomManager.getForTable(col_room.length,searchedRoomList);
+            loadRoomTable(searchedRoomRowList);
+            loadRoomCompanent();
+
+        });
 
     }
+
+
 
 
     public void loadHotelAddView() {
@@ -131,7 +148,7 @@ public class EmployeeView extends Layout {
         this.tablo_hotel.setComponentPopupMenu(hotelMenu);
         loadPancionTable(null);
         loadSeasonTable(null);
-    }
+    } //hotel tablosuna hotel eklemek için yapılan işlemler
 
     public void loadHotelTable(ArrayList<Object[]> hotelList) {
         col_hotel = new Object[]{"ID", "Name", "Address", "Mail", "Phone", "Star", "CarPark", "Wifi", "Pool", "Fitness", "Concierge", "Spa,", "RoomService"};
@@ -140,7 +157,7 @@ public class EmployeeView extends Layout {
         }
         createTable(this.tmdl_hotel, this.tablo_hotel, col_hotel, hotelList);
 
-    }
+    } //hotel tablosunun businessa gidilerek gösterilmesi
 
     public void loadPancionTable(ArrayList<Object[]> pancionList) {
         col_pancion = new Object[]{"pencion_id", "hotel_id", "pencion_type"};
@@ -155,7 +172,7 @@ public class EmployeeView extends Layout {
         createTable(this.tmdl_pancion, this.tbl_pancion, col_pancion, pancionList);
 
 
-    }
+    } // pansiyon tablosunun kullanıcıya gösterilmesi
 
     public void loadSeasonTable(ArrayList<Object[]> seasonList) {
         col_season = new Object[]{"season_id", "hotel_id", "season_startDate" , "season_EndDate"};
@@ -170,7 +187,7 @@ public class EmployeeView extends Layout {
         createTable(this.tmdl_season, this.tablo_sezon, col_season, seasonList);
 
 
-    }
+    } //season tablosunun kullanıcıya gösterilmesi
 
    public void loadRoomTable(ArrayList<Object[]> roomList) {
         col_room = new Object[]{"ID", "Otel Adı", "Pansiyon" , "Oda Tipi", "Stok", "Yetişkin Fiyat","Çocuk Fiyat", "Yatak Kapasitesi", "m2", "Tv","Minibar","Konsol","Kasa","Projeksiyon"};
@@ -185,7 +202,7 @@ public class EmployeeView extends Layout {
         createTable(this.tmdl_room, this.tablo_room, col_room, roomList);
 
 
-    }
+    } //room tablosunun kullanıcıya gösterilmesi
     public void loadRoomCompanent(){
         odaEkleButton.addActionListener(new ActionListener() {
             @Override
@@ -201,6 +218,6 @@ public class EmployeeView extends Layout {
             }
 
         });
-    }
+    } //companentlerin yüklenmesi
 }
 

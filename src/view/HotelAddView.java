@@ -37,7 +37,9 @@ public class HotelAddView extends Layout{
         loadHotelAddCompenent();
 
 
-        //this.hotel = (hotel != null) ? hotel : new Hotel();
+        //Kullanıcı arayüzünü temsil eden katmandır.
+        //Kullanıcı ile etkileşim sağlar, kullanıcıdan gelen istekleri Business'a ileterek işlemleri başlatır.
+        //Verileri kullanıcıya gösterir.
 
 
     }

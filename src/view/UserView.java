@@ -19,6 +19,10 @@ public class UserView extends Layout{
     private User user ;
     private UserManager userManager;
     private DefaultTableModel tmdl_user;
+    //Kullanıcı arayüzünü temsil eden katmandır.
+    //Kullanıcı ile etkileşim sağlar, kullanıcıdan gelen istekleri Business'a ileterek işlemleri başlatır.
+    //Verileri kullanıcıya gösterir.
+
 
     public UserView(User user){
         this.user = user;

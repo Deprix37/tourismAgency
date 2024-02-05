@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class HotelDao {
+    //Veri erişim işlemlerini gerçekleştiren katmandır.
+    //Veritabanına erişim, veri çekme, ekleme, güncelleme ve silme işlemlerini yönetir.
 
     private final Connection con;
     public HotelDao() {

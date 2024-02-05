@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Helper {
+
+    //YARDIMCI METOTLARIM
     public static void setTheme() {
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {

@@ -75,7 +75,6 @@ public class RoomView extends Layout {
             } else
 
             {
-
                 boolean result;
                 Room roomNew = new Room();
 

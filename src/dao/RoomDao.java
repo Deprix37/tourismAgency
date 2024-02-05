@@ -5,12 +5,13 @@ import core.Db;
 import entity.Hotel;
 import entity.Pencion;
 import entity.Room;
+import entity.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoomDao {
     private final Connection con;
@@ -24,6 +25,8 @@ public class RoomDao {
         this.pencionDao = new PencionDao();
         this.con = Db.getInstance();
     }
+    //Veri erişim işlemlerini gerçekleştiren katmandır.
+    //Veritabanına erişim, veri çekme, ekleme, güncelleme ve silme işlemlerini yönetir.
     public boolean saveRoom(Room room) {
         String query = "INSERT INTO public.room" +
                 "(" +
@@ -101,6 +104,57 @@ public class RoomDao {
         }
         return roomList;
     }
+    public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String endDate) {
+        ArrayList<Room> roomList = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM public.room r" +
+                    " LEFT JOIN public.hotel h ON r.hotel_id = h.hotel_id" +
+                    " LEFT JOIN public.season s ON r.hotel_id = s.hotel_id" +
+                    " WHERE (h.hotel_name IS NULL OR LOWER(h.hotel_name) LIKE LOWER(?))" +
+                    " AND (h.hotel_address IS NULL OR LOWER(h.hotel_address) LIKE LOWER(?))";
+
+            // startDate ve endDate dolu ise ekleyelim
+            if (!startDate.isEmpty()) {
+                query += " AND (s.season_startdate IS NULL OR s.season_startdate < ?)";
+            }
+
+            if (!endDate.isEmpty()) {
+                query += " AND (s.season_enddate IS NULL OR s.season_enddate < ?)";
+            }
+
+            PreparedStatement preparedStatement = this.con.prepareStatement(query);
+            preparedStatement.setString(1, "%" + hotelName + "%");
+            preparedStatement.setString(2, "%" + hotelAddress + "%");
+
+            // startDate ve endDate'ı uygun bir tarih formatına çevirip set edin
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date parsedStartDate = startDate.isEmpty() ? null : dateFormat.parse(startDate);
+            java.util.Date parsedEndDate = endDate.isEmpty() ? null : dateFormat.parse(endDate);
+
+            int parameterIndex = 3; // Query'de başlangıç indeksi
+
+            if (parsedStartDate != null) {
+                preparedStatement.setDate(parameterIndex++, new java.sql.Date(parsedStartDate.getTime()));
+            }
+
+            if (parsedEndDate != null) {
+                preparedStatement.setDate(parameterIndex++, new java.sql.Date(parsedEndDate.getTime()));
+            }
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                roomList.add(match(rs));
+            }
+
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+        }
+        return roomList;
+    }
+
+
 
 
 }

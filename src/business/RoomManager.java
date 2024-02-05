@@ -7,6 +7,7 @@ import entity.Pencion;
 import entity.Room;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoomManager {
     private final RoomDao roomDao;
@@ -55,5 +56,8 @@ public class RoomManager {
         }
         return this.roomDao.saveRoom(room);
     }
-
+    public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String enddate) {
+    return roomDao.findByRoomFilter(hotelName,hotelAddress,startDate,enddate);
 }
+}
+
