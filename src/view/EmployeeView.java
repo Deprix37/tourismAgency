@@ -1,6 +1,7 @@
 package view;
 
 import business.*;
+import core.Helper;
 import entity.Room;
 import entity.User;
 
@@ -8,16 +9,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EmployeeView extends Layout {
     private User user;
+
     private UserManager userManager;
     private HotelManager hotelManager;
     private PencionManager pencionManager;
     private SeasonManager seasonManager;
     private RoomManager roomManager;
+    private ReservationManager reservationManager;
     private JPanel container;
     private JTabbedPane tabbedPane1;
     private JTable tablo_hotel;
@@ -38,7 +40,11 @@ public class EmployeeView extends Layout {
     private JButton odaEkleButton;
     private JButton resetButton;
     private JTable tablo_room;
+    private JTextField txt_adultNumber;
+    private JTextField txt_childNumber;
+    private JTable tablo_rezervasyon;
     Object[] col_hotel;
+    Object[] col_rezervation;
     private JPopupMenu hotelMenu;
     Object[] col_pancion;
     Object[] col_season;
@@ -46,6 +52,8 @@ public class EmployeeView extends Layout {
     private DefaultTableModel tmdl_pancion = new DefaultTableModel();
     private DefaultTableModel tmdl_season = new DefaultTableModel();
     private DefaultTableModel tmdl_room = new DefaultTableModel();
+    private DefaultTableModel tmdl_reservation = new DefaultTableModel();
+    private JPopupMenu roomMenu;
 
 
 
@@ -57,10 +65,12 @@ public class EmployeeView extends Layout {
         this.seasonManager = new SeasonManager(null);
         this.hotelManager = new HotelManager();
         this.pencionManager = new PencionManager(null);
+        this.reservationManager = new ReservationManager();
         this.roomManager = new RoomManager();
         this.add(container);
         this.guiInitilaze(1300, 550);
         this.user = loggedInUser;
+
         lbl_welcome.setText("Hoş Geldiniz: " + this.user.getUsername());
 
         loadHotelAddView();
@@ -72,20 +82,10 @@ public class EmployeeView extends Layout {
 
         loadRoomTable(null);
         loadRoomCompanent();
+        loadReservationTable(null);
 
 
-       btn_roomSearch.addActionListener(e -> {
-            String otelName = fld_otelName.getText();
-            String addressName = fld_addressName.getText();
-            String startDatee = fld_startDate.getText();
-            String endDatee = fld_endDate.getText();
 
-            ArrayList<Room> searchedRoomList = roomManager.findByRoomFilter(otelName,addressName,startDatee,endDatee);
-            ArrayList<Object[]> searchedRoomRowList = roomManager.getForTable(col_room.length,searchedRoomList);
-            loadRoomTable(searchedRoomRowList);
-            loadRoomCompanent();
-
-        });
 
     }
 
@@ -204,6 +204,22 @@ public class EmployeeView extends Layout {
 
     } //room tablosunun kullanıcıya gösterilmesi
     public void loadRoomCompanent(){
+
+        tableRowSelect(tablo_room);
+        this.roomMenu = new JPopupMenu();
+
+        roomMenu.add("Rezervasyon Ekle").addActionListener(e -> {
+            RezervationAddView rezervationAddView = new RezervationAddView();
+            rezervationAddView.setVisible(true);
+            rezervationAddView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadRoomTable(null);
+                }
+            });
+        });
+        this.tablo_room.setComponentPopupMenu(roomMenu);
+
         odaEkleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -218,6 +234,43 @@ public class EmployeeView extends Layout {
             }
 
         });
+        btn_roomSearch.addActionListener(e -> {
+            JTextField[] checkFieldList = {txt_adultNumber,txt_childNumber};
+            if (Helper.isFieldListEmpty(checkFieldList)){
+                Helper.showMsg("filter");
+
+            }else {
+                String childNumber = txt_childNumber.getText();
+                String adultNumber = txt_adultNumber.getText();
+                String otelName = fld_otelName.getText();
+                String addressName = fld_addressName.getText();
+                String startDatee = fld_startDate.getText();
+                String endDatee = fld_endDate.getText();
+
+                ArrayList<Room> searchedRoomList = roomManager.findByRoomFilter(otelName, addressName, startDatee, endDatee,childNumber,adultNumber);
+                ArrayList<Object[]> searchedRoomRowList = roomManager.getForTable(col_room.length, searchedRoomList);
+                loadRoomTable(searchedRoomRowList);
+            }
+
+
+        });
+
     } //companentlerin yüklenmesi
+
+    public void loadReservationTable(ArrayList<Object[]> reservationList) {
+        col_rezervation = new Object[]{"ID", "Oda ID", "Giriş Tarihi", "Çıkış Tarihi", "Toplam Tutar", "Misafir Sayısı", "Misafir Adı", "Misafir Kimlik No", "Mail", "Telefon"};
+
+        if (reservationList == null) {
+
+            reservationList = this.reservationManager.getForTable(col_room.length, this.reservationManager.findAll());
+
+        }
+
+        //System.out.println("loadhotel" + pancionList.size());
+        createTable(this.tmdl_reservation, this.tablo_rezervasyon, col_rezervation, reservationList);
+
+
+
+    } //room tablosunun kullanıcıya gösterilmesi
 }
 

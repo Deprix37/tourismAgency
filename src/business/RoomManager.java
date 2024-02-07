@@ -16,8 +16,7 @@ public class RoomManager {
 
     public RoomManager() {
         this.roomDao = new RoomDao();
-        this.hotel = hotel;
-        this.room = room;
+
     }
     public ArrayList<Object[]> getForTable(int size, ArrayList<Room> rooms) {
         ArrayList<Object[]> roomList = new ArrayList<>();
@@ -56,8 +55,8 @@ public class RoomManager {
         }
         return this.roomDao.saveRoom(room);
     }
-    public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String enddate) {
-    return roomDao.findByRoomFilter(hotelName,hotelAddress,startDate,enddate);
+    public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String enddate, String childNumber, String adultNumber) {
+    return roomDao.findByRoomFilter(hotelName,hotelAddress,startDate,enddate,childNumber,adultNumber);
 }
 }
 

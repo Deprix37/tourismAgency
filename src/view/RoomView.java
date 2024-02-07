@@ -42,6 +42,7 @@ public class RoomView extends Layout {
     private Room room;
     private Season season;
 
+
     public RoomView(Room room) {
 
         this.room = room;
@@ -114,6 +115,7 @@ public class RoomView extends Layout {
             }
 
         });
+
 
         }
 

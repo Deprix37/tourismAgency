@@ -104,7 +104,7 @@ public class RoomDao {
         }
         return roomList;
     }
-    public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String endDate) {
+    public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String endDate,String childNumber, String adultNumber) {
         ArrayList<Room> roomList = new ArrayList<>();
 
         try {
@@ -112,7 +112,8 @@ public class RoomDao {
                     " LEFT JOIN public.hotel h ON r.hotel_id = h.hotel_id" +
                     " LEFT JOIN public.season s ON r.hotel_id = s.hotel_id" +
                     " WHERE (h.hotel_name IS NULL OR LOWER(h.hotel_name) LIKE LOWER(?))" +
-                    " AND (h.hotel_address IS NULL OR LOWER(h.hotel_address) LIKE LOWER(?))";
+                    " AND r.room_stock > 0 AND (h.hotel_address IS NULL OR LOWER(h.hotel_address) LIKE LOWER(?))" +
+                    "AND (" + childNumber + "+" + adultNumber+ ") <= r.room_bed_capacity";
 
             // startDate ve endDate dolu ise ekleyelim
             if (!startDate.isEmpty()) {
@@ -120,12 +121,13 @@ public class RoomDao {
             }
 
             if (!endDate.isEmpty()) {
-                query += " AND (s.season_enddate IS NULL OR s.season_enddate < ?)";
+                query += " AND (s.season_enddate IS NULL OR s.season_enddate > ?)";
             }
 
             PreparedStatement preparedStatement = this.con.prepareStatement(query);
             preparedStatement.setString(1, "%" + hotelName + "%");
             preparedStatement.setString(2, "%" + hotelAddress + "%");
+
 
             // startDate ve endDate'ı uygun bir tarih formatına çevirip set edin
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -147,10 +149,11 @@ public class RoomDao {
             while (rs.next()) {
                 roomList.add(match(rs));
             }
-
+            System.out.println(query);
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
         }
+
         return roomList;
     }
 

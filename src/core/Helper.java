@@ -61,6 +61,10 @@ public class Helper {
                 msg = "Hatalı işlem yaptınız !";
                 title = "Hata";
                 break;
+            case "filter":
+                msg = "Yetişkin sayısı ve çocuk sayısı girerek aramalısınız. Minimum 0 değeri girmelisiniz";
+                title = "Hata";
+                break;
             case "error2":
                 msg = "Bu kullanıcı adı ile bir kayıt var";
                 title = "Hata";
