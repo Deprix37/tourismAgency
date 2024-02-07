@@ -62,7 +62,7 @@ public class Helper {
                 title = "Hata";
                 break;
             case "filter":
-                msg = "Yetişkin sayısı ve çocuk sayısı girerek aramalısınız. Minimum 0 değeri girmelisiniz";
+                msg = "Bu alanda ki bilgiler ile rezervasyon yapılacağından giriş-çıkış tarihi ve yetişkin-çocuk sayılarını girmelisiniz";
                 title = "Hata";
                 break;
             case "error2":

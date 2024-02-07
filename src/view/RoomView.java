@@ -59,6 +59,9 @@ public class RoomView extends Layout {
         for (Hotel hotel : this.hotelManager.findAll()) {
             cmb_hotel.addItem(hotel.getComboItem());
         }
+      /*  cmb_hotel.addActionListener(e -> {
+
+        });*/
 
         for (Season season : this.seasonManager.findAll()) {
             cmb_season.addItem(season.getComboItem());

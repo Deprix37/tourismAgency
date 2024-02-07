@@ -209,15 +209,42 @@ public class EmployeeView extends Layout {
         this.roomMenu = new JPopupMenu();
 
         roomMenu.add("Rezervasyon Ekle").addActionListener(e -> {
-            RezervationAddView rezervationAddView = new RezervationAddView();
-            rezervationAddView.setVisible(true);
-            rezervationAddView.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    loadRoomTable(null);
-                }
-            });
+            int selectId = this.getTableSelectedRow(this.tablo_room,0);
+
+
+           /* if (txt_adultNumber.getText().isEmpty() || txt_childNumber.getText().isEmpty()) {
+                Helper.showMsg("filter");
+
+            }*/
+            JTextField[] checkFieldList = {txt_adultNumber,txt_childNumber,fld_endDate,fld_startDate};
+            if (Helper.isFieldListEmpty(checkFieldList)){
+                Helper.showMsg("filter");
+
+            }
+            else {
+                int adultNumber = Integer.parseInt(txt_adultNumber.getText());
+                int childNumber = Integer.parseInt(txt_childNumber.getText());
+                RezervationAddView rezervationAddView = new RezervationAddView(
+                        null,
+                        this.roomManager.getById(selectId),
+                        this.fld_startDate.getText(),
+                        this.fld_endDate.getText(),
+                        adultNumber,
+                        childNumber
+                );
+
+
+                rezervationAddView.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+
+                        loadReservationTable(null);
+
+                    }
+                });
+            }
         });
+
         this.tablo_room.setComponentPopupMenu(roomMenu);
 
         odaEkleButton.addActionListener(new ActionListener() {
@@ -235,11 +262,11 @@ public class EmployeeView extends Layout {
 
         });
         btn_roomSearch.addActionListener(e -> {
-            JTextField[] checkFieldList = {txt_adultNumber,txt_childNumber};
+           /* JTextField[] checkFieldList = {txt_adultNumber,txt_childNumber,fld_endDate,fld_startDate};
             if (Helper.isFieldListEmpty(checkFieldList)){
                 Helper.showMsg("filter");
 
-            }else {
+            }*//*else {*/
                 String childNumber = txt_childNumber.getText();
                 String adultNumber = txt_adultNumber.getText();
                 String otelName = fld_otelName.getText();
@@ -250,7 +277,7 @@ public class EmployeeView extends Layout {
                 ArrayList<Room> searchedRoomList = roomManager.findByRoomFilter(otelName, addressName, startDatee, endDatee,childNumber,adultNumber);
                 ArrayList<Object[]> searchedRoomRowList = roomManager.getForTable(col_room.length, searchedRoomList);
                 loadRoomTable(searchedRoomRowList);
-            }
+           // }
 
 
         });

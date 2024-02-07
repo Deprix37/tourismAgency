@@ -106,6 +106,12 @@ public class RoomDao {
     }
     public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String endDate,String childNumber, String adultNumber) {
         ArrayList<Room> roomList = new ArrayList<>();
+        if (childNumber.equals("")){
+             childNumber = "0";
+        }
+        if (adultNumber.equals("")){
+            adultNumber ="0";
+        }
 
         try {
             String query = "SELECT * FROM public.room r" +
@@ -157,7 +163,21 @@ public class RoomDao {
         return roomList;
     }
 
-
+    public Room getById(int id){
+        Room obj = null;
+        String query = "SELECT * FROM public.room WHERE room_id = ?";
+        try {
+            PreparedStatement pr = this.con.prepareStatement(query);
+            pr.setInt(1,id);
+            ResultSet rs = pr.executeQuery();
+            if (rs.next()){
+                obj = this.match(rs);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return obj;
+    }
 
 
 }

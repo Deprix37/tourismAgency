@@ -58,5 +58,8 @@ public class RoomManager {
     public ArrayList<Room> findByRoomFilter(String hotelName, String hotelAddress, String startDate, String enddate, String childNumber, String adultNumber) {
     return roomDao.findByRoomFilter(hotelName,hotelAddress,startDate,enddate,childNumber,adultNumber);
 }
+    public Room getById(int id){
+        return this.roomDao.getById(id);
+    }
 }
 
