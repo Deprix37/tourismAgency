@@ -10,10 +10,10 @@ public class Reservation {
     private LocalDate reservationEndDate;
     private int reservationTotalPrice;
     private int reservationGuesNumber;
-    private int reservationGuestName;
-    private int reservationGuestId;
+    private String reservationGuestName;
+    private String reservationGuestId;
     private String reservationMail;
-    private int reservationPhone;
+    private String reservationPhone;
 
     public Reservation(){
 
@@ -67,19 +67,19 @@ public class Reservation {
         this.reservationGuesNumber = reservationGuesNumber;
     }
 
-    public int getReservationGuestName() {
+    public String getReservationGuestName() {
         return reservationGuestName;
     }
 
-    public void setReservationGuestName(int reservationGuestName) {
+    public void setReservationGuestName(String reservationGuestName) {
         this.reservationGuestName = reservationGuestName;
     }
 
-    public int getReservationGuestId() {
+    public String getReservationGuestId() {
         return reservationGuestId;
     }
 
-    public void setReservationGuestId(int reservationGuestId) {
+    public void setReservationGuestId(String reservationGuestId) {
         this.reservationGuestId = reservationGuestId;
     }
 
@@ -91,11 +91,11 @@ public class Reservation {
         this.reservationMail = reservationMail;
     }
 
-    public int getReservationPhone() {
+    public String getReservationPhone() {
         return reservationPhone;
     }
 
-    public void setReservationPhone(int reservationPhone) {
+    public void setReservationPhone(String reservationPhone) {
         this.reservationPhone = reservationPhone;
     }
 

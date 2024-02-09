@@ -5,6 +5,7 @@ import dao.RoomDao;
 import entity.Hotel;
 import entity.Pencion;
 import entity.Room;
+import entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,5 +62,13 @@ public class RoomManager {
     public Room getById(int id){
         return this.roomDao.getById(id);
     }
+    public void updateStock(Room room){
+        if (this.getById(room.getRoom_id())==null){
+            Helper.showMsg(room.getRoom_id()+ " ID KAYITLI ODA BULUNAMADI");
+            return;
+        }
+        this.roomDao.updateStok(room);
+    }
+
 }
 

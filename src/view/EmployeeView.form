@@ -187,14 +187,6 @@
                       <text value="Oda Ekle"/>
                     </properties>
                   </component>
-                  <component id="8a4dd" class="javax.swing.JButton" binding="resetButton" default-binding="true">
-                    <constraints>
-                      <grid row="2" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Reset"/>
-                    </properties>
-                  </component>
                   <component id="6d250" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>

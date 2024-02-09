@@ -178,6 +178,21 @@ public class RoomDao {
         }
         return obj;
     }
+    public boolean updateStok(Room room){
+        String query = "UPDATE public.room SET " +
+                "room_stock= ? " +
+                "WHERE room_id = ? ";
+        try {
+            PreparedStatement pr = con.prepareStatement(query);
+            pr.setInt(1,room.getRoom_stock());
+            pr.setInt(2,room.getRoom_id());
+
+            return pr.executeUpdate() != -1;
+        }catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return true;
+    }
 
 
 }

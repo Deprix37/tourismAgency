@@ -2,10 +2,13 @@ package view;
 
 import business.ReservationManager;
 import business.RoomManager;
+import core.Helper;
 import entity.Reservation;
 import entity.Room;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -47,6 +50,7 @@ public class RezervationAddView extends Layout{
     private EmployeeView employeeView;
     private Room room;
     public RezervationAddView(Reservation reservation, Room selectedRoom, String start_date, String endDate, int adultNumber, int childNumber) {
+
         //this.pencionManager = new PencionManager(hotel);
     this.room = selectedRoom;
     if (reservation == null){
@@ -58,6 +62,8 @@ public class RezervationAddView extends Layout{
 
     this.reservationManager = new ReservationManager();
     this.roomManager = new RoomManager();
+        this.add(container);
+        this.guiInitilaze(1000, 700);
     this.fld_rezervationOtelName.setText(this.room.getHotel().getHotelName());
     this.fld_roomType.setText(this.room.getRoom_type());
     this.fld_pansiyonType.setText(this.room.getPencion().getPencionType());
@@ -91,12 +97,46 @@ public class RezervationAddView extends Layout{
         this.fld_totalPrice.setText(String.valueOf(totalPrice));
 
 
+        btn_rezervationSave.addActionListener(e -> {
+            JTextField[] checkFieldList={
+                    this.fld_guestName,
+                    this.fld_guestID,
+                    this.fld_guestMail,
+                    this.fld_guestPhone
+            };
+            if (Helper.isFieldListEmpty(checkFieldList)){
+                Helper.showMsg("fill");
+            }else {
+                boolean result = false;
+                this.reservation.setReservationRoomId(this.room.getRoom_id());
+                this.reservation.setReservationStartDate(LocalDate.parse(start_date,formatter));
+                this.reservation.setReservationEndDate(LocalDate.parse(endDate,formatter));
+                this.reservation.setReservationTotalPrice(totalPrice);
+                this.reservation.setReservationGuesNumber(totalGuest);
 
+                this.reservation.setReservationGuestName(this.fld_guestName.getText());
 
+                this.reservation.setReservationGuestId(this.fld_guestID.getText());
+                this.reservation.setReservationMail(this.fld_guestMail.getText());
+                this.reservation.setReservationPhone(this.fld_guestPhone.getText());
+                if (this.reservation.getID()!=0){
+                    //result = this.reservationManager.up(this.reservation);
+                }
+                else {
+                    result = this.reservationManager.save(this.reservation);
+                    this.room.setRoom_stock(this.room.getRoom_stock() - 1);
+                    this.roomManager.updateStock(this.room);
 
+                }
+                if (result){
+                    Helper.showMsg("done");
+                    dispose();
+                }else {
+                    Helper.showMsg("error");
+                }
 
-        this.add(container);
-        this.guiInitilaze(1000, 700);
+            }
+        });
     }
 
 
